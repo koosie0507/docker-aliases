@@ -4,9 +4,9 @@
 function run_docker_command()
 {
 	local DOCKER_CMD
-	if ( which docker > /dev/null 2>&1 ); then
+	if ( unalias docker > /dev/null 2>&1; type docker > /dev/null 2>&1 ); then
 		docker $@
-	elif ( which lima > /dev/null 2>&1 ); then
+	elif ( unalias lima > /dev/null 2>&1; type lima > /dev/null 2>&1 ); then
 		lima nerdctl $@
 	else
 		echo "Please install either Docker Desktop or Lima" 1>&2
@@ -14,5 +14,5 @@ function run_docker_command()
 
 }
 
-alias dicker=run_docker_command
+alias docker=run_docker_command
 
